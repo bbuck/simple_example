@@ -1,0 +1,26 @@
+<!-- Going to check to see if the model has any errors on it, if so
+     display a list of those errors for the user to correct. -->
+<% if @article.errors.count > 0 %>
+  <h3>Errors</h3>
+  <ul>
+    <% @article.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<!-- Render the shared form for creating and updating the Article. I use the
+     new_record? function for the submit button to determine if I should show a
+     "Create" or "Update" action (which is strictly optional) to the user. -->
+<%= form_for @article do |f| %>
+  <%= f.label :author %>
+  <%= f.text_field :author %><br />
+
+  <%= f.label :title %>
+  <%= f.text_field :title %><br />
+
+  <%= f.label :body %><br />
+  <%= f.text_area :body %><br />
+
+  <%= f.submit (@article.new_record? ? "Create" : "Update") %>
+<% end %>
